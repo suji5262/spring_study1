@@ -16,4 +16,8 @@ public class JpaMain {
         em.close();
         emf.close(); // 실제 emf 가 다 끝나면 닫아줘야함
     }
+
+    // 비즈니스 로직
+    private static void logic(EntityManager em) {}
+
 }
