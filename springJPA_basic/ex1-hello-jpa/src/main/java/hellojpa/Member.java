@@ -10,6 +10,13 @@ public class Member {
     private Long id;
     private String name;
 
+    public Member() { // jpa는 동적으로 객체를 생성해내야 함
+    }// -> 기본생성자가 있어야 한다
+    public Member(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
