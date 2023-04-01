@@ -90,17 +90,30 @@ public class JpaMain {
 //            System.out.println("==================");
 
 
-            Member member = em.find(Member.class, 150L);
-            member.setName("AAAA");
+//            Member member = em.find(Member.class, 150L);
+//            member.setName("AAAA");
+//
+////            em.detach(member); // 준영속 -> jpa 에서 관리 x
+////            // select 쿼리만 나가고 update 쿼리는 x
+//
+//            em.clear(); // 1차캐시를 통으로 날림
+//
+//            Member member2 = em.find(Member.class, 150L);
+//
+//            System.out.println("==================");
 
-//            em.detach(member); // 준영속 -> jpa 에서 관리 x
-//            // select 쿼리만 나가고 update 쿼리는 x
 
-            em.clear(); // 1차캐시를 통으로 날림
+            Member member = new Member();
+//            member.setId("ID_A");
+            member.setUsername("C");
 
-            Member member2 = em.find(Member.class, 150L);
+            System.out.println("=================");
 
-            System.out.println("==================");
+            em.persist(member);
+
+            System.out.println("member.id = " + member.getId());
+            System.out.println("=================");
+
 
             tx.commit(); // 이때 쿼리가 나간다
         } catch (Exception e) {
