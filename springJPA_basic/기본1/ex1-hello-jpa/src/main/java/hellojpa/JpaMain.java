@@ -103,17 +103,29 @@ public class JpaMain {
 //            System.out.println("==================");
 
 
-            Member member = new Member();
-//            member.setId("ID_A");
-            member.setUsername("C");
+//            Member member = new Member();
+////            member.setId("ID_A");
+//            member.setUsername("C");
+//
+//            System.out.println("=================");
+//
+//            em.persist(member);
+//
+//            System.out.println("member.id = " + member.getId());
+//            System.out.println("=================");
 
-            System.out.println("=================");
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
-            em.persist(member);
+            Member2 member2 = new Member2();
+            member2.setUsername("member1");
+            member2.setTeam(team);
+            em.persist(member2);
 
-            System.out.println("member.id = " + member.getId());
-            System.out.println("=================");
-
+            Member2 findMember = em.find(Member2.class, member2.getId());
+            Team findTeam = findMember.getTeam();
+            System.out.println("findTeam = " + findTeam.getName());
 
             tx.commit(); // 이때 쿼리가 나간다
         } catch (Exception e) {
