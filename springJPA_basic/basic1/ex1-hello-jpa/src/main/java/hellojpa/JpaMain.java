@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -123,9 +124,21 @@ public class JpaMain {
             member2.setTeam(team);
             em.persist(member2);
 
+            em.flush();
+            em.clear();
+            // 위 두개 꼭 넣어야함! → 이걸 써야 db 에서 값을 깔끔하게 가져온다
+
             Member2 findMember = em.find(Member2.class, member2.getId());
-            Team findTeam = findMember.getTeam();
-            System.out.println("findTeam = " + findTeam.getName());
+            List<Member2> member2s = findMember.getTeam().getMember2s();
+
+            for (Member2 m : member2s) {
+                System.out.println("m = " + m.getUsername());
+            }
+
+
+//            Member2 findMember = em.find(Member2.class, member2.getId());
+//            Team findTeam = findMember.getTeam();
+//            System.out.println("findTeam = " + findTeam.getName());
 
             tx.commit(); // 이때 쿼리가 나간다
         } catch (Exception e) {
