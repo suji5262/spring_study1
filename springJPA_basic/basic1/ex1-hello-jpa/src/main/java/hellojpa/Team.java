@@ -16,6 +16,11 @@ public class Team {
     @OneToMany(mappedBy = "team")
     private List<Member2> member2s = new ArrayList<>();
 
+    public void addMember(Member2 member2){
+        member2.setTeam(this);
+        member2s.add(member2);
+    }
+
     public Long getId() {
         return id;
     }
